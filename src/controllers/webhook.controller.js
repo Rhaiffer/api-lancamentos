@@ -27,7 +27,11 @@ const handleWebhook = async (req, res) => {
     if (date) {
       const [day, month, year] = date.split('/');
       if (day && month && year) {
-        transactionDate = new Date(year, month - 1, day);
+        transactionDate = new Date(
+          parseInt(year),
+          parseInt(month) - 1,
+          parseInt(day),
+        );
       } else {
         transactionDate = new Date(date);
       }
