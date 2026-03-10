@@ -3,7 +3,6 @@ const login = require('./auth/login');
 const routes = express();
 const checkLogin = require('./middlewares/checkLogin');
 const checkEmail = require('./middlewares/checkEmail');
-const validateTask = require('./middlewares/validateTask');
 const passwordValidation = require('./middlewares/validatePassword');
 // controller Usuarios
 const {
@@ -13,16 +12,8 @@ const {
   updateUser,
   deleteUser,
 } = require('./controllers/users.controller');
-// controller Tarefas
-
-const {
-  createTask,
-  getAllTasks,
-  getTaskById,
-  updateTask,
-  deleteTask,
-  getTasksByStatusOrDate,
-} = require('./controllers/tasks.controller');
+// controller Webhook
+const { handleWebhook } = require('./controllers/webhook.controller');
 
 // rota de login
 routes.post('/api/auth/login', login);
@@ -39,12 +30,7 @@ routes.put(
 );
 routes.delete('/api/v1/users/:id', checkLogin, deleteUser);
 
-// controller Tarefas
-routes.post('/api/v1/tasks', checkLogin, createTask);
-routes.get('/api/v1/tasks', checkLogin, getAllTasks);
-routes.get('/api/v1/tasks/search', checkLogin, getTasksByStatusOrDate);
-routes.get('/api/v1/tasks/:id', checkLogin, getTaskById);
-routes.put('/api/v1/tasks/:id', checkLogin, validateTask, updateTask);
-routes.delete('/api/v1/tasks/:id', checkLogin, deleteTask);
+// rota de webhook
+routes.post('/api/v1/webhook', handleWebhook);
 
 module.exports = routes;
