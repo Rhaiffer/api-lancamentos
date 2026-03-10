@@ -25,6 +25,7 @@ const handleWebhook = async (req, res) => {
 
     let transactionDate = new Date();
     if (date) {
+      console.log('Received date:', date);
       const [day, month, year] = date.split('/');
       if (day && month && year) {
         transactionDate = new Date(
