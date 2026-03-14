@@ -20,6 +20,7 @@
     "date-fns": "^3.0.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-rate-limit": "^8.3.1",
     "express-validator": "^7.0.1",
     "fns": "^1.0.0",
     "google-auth-library": "^10.6.1",
