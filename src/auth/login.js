@@ -20,7 +20,8 @@ const loginUser = async (req, res) => {
     });
   }
 
-  const emailTrim = email.trim();
+  // Sanitização forçada: garante que o e-mail será tratado como String e não um objeto malicioso de Injeção NoSQL { $ne: null }
+  const emailTrim = String(email).trim();
 
   try {
     const result = await User.findOne({ email: emailTrim });

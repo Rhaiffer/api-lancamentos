@@ -8,7 +8,7 @@
     "start": "node ./src/index.js",
     "lint": "eslint .",
     "swagger-autogen": "node ./src/swagger.js",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest",
     "format": "prettier --write ."
   },
   "author": "Rhaiffer",
@@ -20,6 +20,7 @@
     "date-fns": "^3.0.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-rate-limit": "^8.3.1",
     "express-validator": "^7.0.1",
     "fns": "^1.0.0",
     "google-auth-library": "^10.6.1",
@@ -33,6 +34,8 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",

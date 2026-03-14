@@ -1,7 +1,7 @@
 const request = require('supertest');
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
-const app = require('../index');
+const app = require('../app');
 const { updateUser } = require('../controllers/users.controller');
 const mongoose = require('mongoose');
 
@@ -178,10 +178,12 @@ describe('updateUser', () => {
       expect(genSaltSyncMock).toHaveBeenCalledWith(10);
       expect(hashSyncMock).toHaveBeenCalledWith(req.body.password, 'salt');
       expect(findByIdAndUpdateMock).toHaveBeenCalledWith(id, {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: 'hashed_password',
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: 'hashed_password',
+        },
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
@@ -289,10 +291,12 @@ describe('updateUser', () => {
     expect(genSaltSyncMock).toHaveBeenCalledWith(10);
     expect(hashSyncMock).toHaveBeenCalledWith(req.body.password, 'salt');
     expect(findByIdAndUpdateMock).toHaveBeenCalledWith(id, {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: 'hashed_password',
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: 'hashed_password',
+      },
     });
     // Verifica se a função status da resposta foi chamada com 400
     expect(res.status).toHaveBeenCalledWith(400);
