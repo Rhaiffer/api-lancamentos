@@ -107,16 +107,18 @@ class UserController {
       }
 
       const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(password, salt);
+      const hash = bcrypt.hashSync(String(password), salt);
 
       const user = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+        firstName: String(firstName).trim(),
+        lastName: String(lastName).trim(),
+        email: String(email).trim(),
         password: hash,
       };
 
-      const resultUpdate = await User.findByIdAndUpdate(id, user);
+      // Realizamos um type cast estrito (String) e usamos o operador mongoose $set explicitamente
+      // para impedir o envio direto do vetor malicioso NoSql Injection no objeto original
+      const resultUpdate = await User.findByIdAndUpdate(id, { $set: user });
       if (!resultUpdate) {
         return res.status(400).json({ message: 'Erro ao atualizar usuário!' });
       }
