@@ -22,7 +22,7 @@ class UserController {
 
     // Sanitização contra NoSQL Object Injection
     const emailTrim = String(email).trim();
-    
+
     try {
       const resultEmail = await User.findOne({ email: emailTrim });
 

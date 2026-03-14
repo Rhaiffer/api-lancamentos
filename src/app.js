@@ -14,7 +14,8 @@ const app = express();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 100, // Limita a 100 requisições por IP a cada 15 minutos
-  message: 'Muitas requisições criadas a partir deste IP, tente novamente após 15 minutos',
+  message:
+    'Muitas requisições criadas a partir deste IP, tente novamente após 15 minutos',
   standardHeaders: true,
   legacyHeaders: false,
 });
