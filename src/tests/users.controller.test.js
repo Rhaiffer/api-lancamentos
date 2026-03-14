@@ -1,7 +1,7 @@
 const request = require('supertest');
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
-const app = require('../index');
+const app = require('../app');
 const { updateUser } = require('../controllers/users.controller');
 const mongoose = require('mongoose');
 

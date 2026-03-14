@@ -14,21 +14,17 @@ const checkLogin = async (req, res, next) => {
 
   const parts = authHeader.split(' ');
   if (!parts.length === 2)
-    return res
-      .status(400)
-      .json({
-        message:
-          "Token deve ser composto por duas partes: 'Bearer' e o valor do token.",
-      });
+    return res.status(400).json({
+      message:
+        "Token deve ser composto por duas partes: 'Bearer' e o valor do token.",
+    });
 
   const [scheme, token] = parts;
   if (!/^Bearer$/i.test(scheme))
-    return res
-      .status(400)
-      .json({
-        message:
-          'Formato do token inválido! O formato correto é: Bearer [token].',
-      });
+    return res.status(400).json({
+      message:
+        'Formato do token inválido! O formato correto é: Bearer [token].',
+    });
 
   jwt.verify(token, segredo, async (err, decoded) => {
     if (err)
